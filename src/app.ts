@@ -1,8 +1,12 @@
 import express from 'express';
-import { bookRouter, healthRouter } from './routes/index.ts';
+import { businessRouter, healthRouter, serviceRouter } from './routes/index.ts';
+import { logger, errorHandler } from './middleware/index.ts';
+
 
 export const app = express();
-
+    
+app.use(logger);
 app.use('/health', healthRouter);
-app.use('/books', bookRouter);
-
+app.use('/businesses', businessRouter);
+app.use('/services', serviceRouter);
+app.use(errorHandler);
